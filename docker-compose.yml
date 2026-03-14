@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  ollama:
+    build: .
+    container_name: ollama-service
+    restart: always
+
+    ports:
+      - "11434:11434"
+
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+
+    volumes:
+      - ollama_storage:/root/.ollama
+
+    deploy:
+      resources:
+        limits:
+          cpus: "3.0"
+          memory: 4G
+
+volumes:
+  ollama_storage:
